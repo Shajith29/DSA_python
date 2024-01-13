@@ -230,25 +230,90 @@ class LinkedList(object):
                 s.next = p
         
         return new_node
+    
+
+    def remove_duplicates(self):
+        curr_node = self.head
+        nodes = dict()
+        prev_node = None
+
+        while curr_node:
+            if curr_node.data not in nodes:
+                nodes[curr_node.data] = 1
+                prev_node = curr_node
+               
+            else:
+                prev_node.next = curr_node.next
+
+            curr_node = prev_node.next
+
+    
+    def n_to_the_last_node(self,n):
+
+        #Method 1
+        # llength = self.length_iterative()
+
+        
+        # curr_node = self.head
+        # while curr_node:
+        #     if llength == n:
+        #         return curr_node.data
+            
+        #     llength -= 1
+        #     curr_node = curr_node.next
+            
+        #     if curr_node is None:
+        #         return 
+
+
+        p = self.head
+        q = self.head
+
+        count = 0
+
+        while q and count < n:
+            q = q.next
+            count += 1
+
+        if not q:
+            print(str(n) + " greater than the length of the list")
+        
+        while p and q:
+            p = p.next
+            q = q.next
+        return p.data
+            
+        
+        
+
+
+
+        
             
 
         
 
         
+# list1 = LinkedList()
+# list1.append(1)
+# list1.append(5)
+# list1.append(7)
+# list1.append(9)
+# list1.append(10)
+
+# list2 = LinkedList()
+# list2.append(2)
+# list2.append(3)
+# list2.append(4)
+# list2.append(6)
+# list2.append(8)
+
+# list1.sorted_merge(list2)
+# list1.print()
+    
 list1 = LinkedList()
 list1.append(1)
-list1.append(5)
-list1.append(7)
-list1.append(9)
-list1.append(10)
-
-list2 = LinkedList()
-list2.append(2)
-list2.append(3)
-list2.append(4)
-list2.append(6)
-list2.append(8)
-
-list1.sorted_merge(list2)
-list1.print()
-
+list1.append(2)
+list1.append(3)
+list1.append(4)
+print(list1.n_to_the_last_node(2))
