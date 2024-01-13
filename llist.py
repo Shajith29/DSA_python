@@ -175,13 +175,80 @@ class LinkedList(object):
 
         self.head  = prev
 
+    def reverse_recursive(self):
+        
+        def _reverse_recursive(curr,prev):
+            if not curr:
+                return prev
+            
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+            return _reverse_recursive(curr,prev)
+
+        self.head = _reverse_recursive(curr=self.head,prev=None)
+
+    
+   
+    def sorted_merge(self,llist):
+        p = self.head
+        q = llist.head
+        s = None
+
+        if not p:
+            return q
+        
+        if not q:
+            return p
+        
+        if p and q:
+            if p.data <= q.data:
+                s = p
+                p = s.next
+            else:
+                s = q
+                q = s.next
+
+            new_node = s
+
+        while p and q:
+            if p.data <= q.data:
+                s.next = p
+                s = p
+                p = s.next
+            else:
+                s.next = q
+                s = q
+                q = s.next
+            
+            if not p:
+                s.next = q
+
+            if not q:
+                s.next = p
+        
+        return new_node
+            
+
         
 
         
-ll = LinkedList()
-ll.append(1)
-ll.append(2)
-ll.append(3)
-ll.append(4)
-ll.reverse_iterative()
-ll.print()
+list1 = LinkedList()
+list1.append(1)
+list1.append(5)
+list1.append(7)
+list1.append(9)
+list1.append(10)
+
+list2 = LinkedList()
+list2.append(2)
+list2.append(3)
+list2.append(4)
+list2.append(6)
+list2.append(8)
+
+list1.sorted_merge(list2)
+list1.print()
+
