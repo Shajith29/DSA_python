@@ -282,16 +282,53 @@ class LinkedList(object):
             p = p.next
             q = q.next
         return p.data
+    
+    def count_the_occurences_iterative(self,data):
+        count = 0
+        curr = self.head
+        while curr:
+            if curr.data == data:
+                count += 1
+
+            curr = curr.next
+        
+        return count
+    
+    def count_the_occurences_recursive(self,node,data):
+        if not node:
+            return 0
+        
+        if node.data == data:
+            return 1 + self.count_the_occurences_recursive(node.next,data)
+        else:
+            return self.count_the_occurences_recursive(node.next,data)
+        
+    
+    def rotate(self,k):
+        p = self.head
+        q = self.head
+        count = 0
+        prev = None
+
+        while p and count < k:
+            prev = p
+            p  = p.next
+            q  = q.next
+            count += 1
+        
+        p = prev
+        
+        while q:
+            prev = q
+            q = q.next        
+        q = prev
+
+        q.next = self.head
+        self.head = p.next
+        p.next = None
+
             
-        
-        
-
-
-
-        
             
-
-        
 
         
 # list1 = LinkedList()
@@ -311,9 +348,37 @@ class LinkedList(object):
 # list1.sorted_merge(list2)
 # list1.print()
     
+# list1 = LinkedList()
+# list1.append(1)
+# list1.append(2)
+# list1.append(3)
+# list1.append(4)
+# print(list1.n_to_the_last_node(2))
+    
+# list1 = LinkedList()
+# list1.append(1)
+# list1.append(2)
+# list1.append(2)
+# list1.append(1)
+# list1.append(3)
+# list1.append(4)
+# list1.append(1)
+# print(list1.count_the_occurences_iterative(1))
+# print(list1.count_the_occurences_recursive(list1.head,4))
+        
 list1 = LinkedList()
 list1.append(1)
 list1.append(2)
 list1.append(3)
 list1.append(4)
-print(list1.n_to_the_last_node(2))
+list1.append(5)
+list1.append(6)
+list1.print()
+print('\n')
+list1.rotate(3)
+list1.print()
+
+
+
+
+
