@@ -308,24 +308,100 @@ class LinkedList(object):
         p = self.head
         q = self.head
         count = 0
-        prev = None
 
         while p and count < k:
             prev = p
-            p  = p.next
-            q  = q.next
+            p = p.next
+            q = q.next
             count += 1
         
         p = prev
-        
+
         while q:
             prev = q
-            q = q.next        
-        q = prev
+            q = q.next
 
+        q = prev
         q.next = self.head
-        self.head = p.next
+        self.head = q
         p.next = None
+
+    def is_palindrome(self):
+
+        #Method 1
+        # s = ""
+        # curr = self.head
+
+        # while curr:
+        #     s += curr.data
+        #     curr = curr.next
+
+        
+        # if s == s[::-1]:
+        #     return True
+        
+        # return False
+
+        #Method 2
+
+        # curr = self.head
+        # stack = []
+
+        # while curr:
+        #     stack.append(curr.data)
+        #     curr = curr.next
+
+        # curr = self.head
+
+        # while curr and len(stack) != 0:
+        #     data = stack.pop()
+        #     if curr.data != data:
+        #         return False
+            
+        #     curr = curr.next
+            
+        # return True
+
+        #Method 3
+
+        p = self.head
+        q = self.head
+
+        prev = []
+        i = 0
+        while q:
+            prev.append(q)
+            q  = q.next
+            i += 1
+        
+        q = prev[i-1]
+
+        count = 1
+
+        while count <= i // 2 + 1:
+            if prev[-count].data != p.data:
+                return False
+            
+            p = p.next
+            count += 1
+        return True
+    
+
+    def move_tail_to_head(self):
+        p = self.head
+        q = None
+
+        while p.next:
+            q = p
+            p = p.next
+
+        p.next = self.head
+        self.head = p
+        q.next = None
+
+       
+
+        
 
             
             
@@ -366,17 +442,51 @@ class LinkedList(object):
 # print(list1.count_the_occurences_iterative(1))
 # print(list1.count_the_occurences_recursive(list1.head,4))
         
+# list1 = LinkedList()
+# list1.append(1)
+# list1.append(2)
+# list1.append(3)
+# list1.append(4)
+# list1.append(5)
+# list1.append(6)
+# list1.print()
+# print('\n')
+# list1.rotate(3)
+# list1.print()
+        
+# list1 = LinkedList()
+# list1.append("R")
+# list1.append("A")
+# list1.append("D")
+# list1.append("A")
+# list1.append("R")
+
+# list2 = LinkedList()
+# list2.append("A")
+# list2.append("B")
+# list2.append("C")
+# print(list1.is_palindrome())
+# print(list2.is_palindrome())
+    
 list1 = LinkedList()
-list1.append(1)
-list1.append(2)
-list1.append(3)
-list1.append(4)
-list1.append(5)
-list1.append(6)
+list1.append("A")
+list1.append("B")
+list1.append("C")
+list1.append("D")
 list1.print()
-print('\n')
-list1.rotate(3)
+print("\n")
+list1.move_tail_to_head()
 list1.print()
+
+
+
+
+
+
+
+
+
+
 
 
 
