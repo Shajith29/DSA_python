@@ -399,6 +399,40 @@ class LinkedList(object):
         self.head = p
         q.next = None
 
+    def sum_two_list(self,llist):
+        p = self.head
+        q = llist.head
+        sum_list = LinkedList()
+        carry = 0
+
+        while p or q:
+            if not p:
+                i = 0
+            else:
+                i = p.data
+
+            if not q:
+                j = 0
+            else:
+                j = q.data
+
+            sum = i + j + carry
+
+            if sum >= 10:
+                carry = 1
+                remainder = sum % 10
+                sum_list.append(remainder)
+            else:
+                carry = 0
+                sum_list.append(sum)
+            
+            if p:
+                p = p.next
+            
+            if q:
+                q = q.next
+
+        sum_list.print()
        
 
         
@@ -468,17 +502,27 @@ class LinkedList(object):
 # print(list1.is_palindrome())
 # print(list2.is_palindrome())
     
+# list1 = LinkedList()
+# list1.append("A")
+# list1.append("B")
+# list1.append("C")
+# list1.append("D")
+# list1.print()
+# print("\n")
+# list1.move_tail_to_head()
+# list1.print()
+
 list1 = LinkedList()
-list1.append("A")
-list1.append("B")
-list1.append("C")
-list1.append("D")
-list1.print()
-print("\n")
-list1.move_tail_to_head()
-list1.print()
+list1.append(1)
+list1.append(2)
+list1.append(3)
 
+list2 = LinkedList()
+list2.append(9)
+list2.append(8)
+list2.append(7)
 
+list1.sum_two_list(list2)
 
 
 
