@@ -400,12 +400,12 @@ class LinkedList(object):
         q.next = None
 
     def sum_two_list(self,llist):
-        p = self.head
-        q = llist.head
-        sum_list = LinkedList()
-        carry = 0
+       p = self.head
+       q = llist.head
+       sum_list = LinkedList()
+       carry = 0
+       while p or q:
 
-        while p or q:
             if not p:
                 i = 0
             else:
@@ -419,20 +419,28 @@ class LinkedList(object):
             sum = i + j + carry
 
             if sum >= 10:
-                carry = 1
-                remainder = sum % 10
+                remainder = sum % 10 
                 sum_list.append(remainder)
+                carry = 1
             else:
                 carry = 0
                 sum_list.append(sum)
-            
+
             if p:
                 p = p.next
             
             if q:
                 q = q.next
+       sum_list.print()
 
-        sum_list.print()
+    
+
+
+
+
+
+        
+
        
 
         
