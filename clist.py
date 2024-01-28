@@ -1,7 +1,41 @@
+
 class Node(object):
     def __init__(self,data):
         self.data = data
         self.next = None
+
+class LinkedList(object):
+    def __init__(self):
+        self.head = None
+
+    def append(self,data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+
+        last_node.next = new_node
+        new_node.next = None
+
+    def prepend(self,data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+
+        new_node.next = self.head
+        self.head = new_node
+    
+    def print(self):
+        if self.head is None:
+            print("The list is empty")
+        
+        curr_node = self.head
+        while curr_node:
+            print(curr_node.data)
+            curr_node = curr_node.next
 
 class CircularLinkedList(object):
     def __init__(self):
@@ -117,6 +151,60 @@ class CircularLinkedList(object):
         print("\n")
         split_list.print() 
 
+    def remove_node(self,node):
+
+        if self.head == node:
+            curr = self.head
+            while curr.next != self.head:
+                curr = curr.next
+
+            curr.next = self.head.next
+            self.head = self.head.next
+        
+            
+        else:
+            cur = self.head
+            prev = None
+            while cur.next != self.head:
+                prev = cur
+                cur = cur.next
+
+                if cur  == node:
+                    prev.next = cur.next
+                    cur = cur.next
+
+
+    
+    def jospheus_circle(self,step):
+        curr = self.head
+
+        while len(self) > 1:
+            count = 1
+
+            while count != step:
+                curr = curr.next
+                count += 1
+
+            self.remove_node(curr) 
+            curr = curr.next   
+
+    def is_circular_linked_list(self,list):
+        curr = list.head
+
+        while curr:
+
+            if curr.next == list.head: 
+                return True
+
+            curr = curr.next
+            
+        return False
+
+                  
+        
+
+
+
 
             
             
@@ -131,9 +219,27 @@ class CircularLinkedList(object):
 # clist.append(3)
 # clist.remove(3)
     
+# clist = CircularLinkedList()
+# clist.append("A")
+# clist.append("B")
+# clist.append("C")
+# clist.append("D")
+# clist.split_list()
+    
+# jlist = CircularLinkedList()
+# jlist.append(1)
+# jlist.append(2)
+# jlist.append(3)
+# jlist.append(4)
+# jlist.jospheus_circle(2)
+
+slist = LinkedList()
+slist.append(1)
+slist.append(2)
 clist = CircularLinkedList()
-clist.append("A")
-clist.append("B")
-clist.append("C")
-clist.append("D")
-clist.split_list()
+clist.append(1)
+clist.append(2)
+clist.append(3)
+clist.append(4)
+print(clist.is_circular_linked_list(clist))
+print(clist.is_circular_linked_list(slist))
