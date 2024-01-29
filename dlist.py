@@ -48,14 +48,63 @@ class DoublyLinkedList(object):
             new_node.prev = None
             self.head.prev = new_node
             self.head = new_node
-
     
+
+    def insert_after(self,key,data):
+        curr = self.head
+        
+        while curr:
+            if curr.next is None and curr.data == key:
+
+                new_node = Node(data)
+                curr.next = new_node
+                new_node.prev = curr
+                new_node.next = None
+                return
+
+            elif curr.data == key:
+
+                nxt = curr.next
+                new_node = Node(data)
+                curr.next = new_node
+                new_node.next = nxt
+                new_node.prev = curr
+                nxt.prev = new_node
+            
+            curr = curr.next
+
+    def insert_before(self,key,data):
+        curr = self.head
+        while curr:
+            if curr.prev is None and curr.data == key:
+               new_node = Node(data)
+               self.prepend(data)
+               return 
+            
+            elif curr.data == key:
+                new_node = Node(data)
+                prev = curr.prev
+                prev.next = new_node
+                curr.prev = new_node
+                new_node.next = curr
+                new_node.prev = prev
+
+            curr = curr.next
+
+                
+    
+# dlist = DoublyLinkedList()
+# dlist.append(1)
+# dlist.append(2)
+# dlist.append(3)
+# dlist.append(4)
+# dlist.prepend(0)
+# dlist.print()
+
 dlist = DoublyLinkedList()
 dlist.append(1)
 dlist.append(2)
 dlist.append(3)
 dlist.append(4)
-dlist.prepend(0)
+dlist.insert_before(4,12)
 dlist.print()
-
-
