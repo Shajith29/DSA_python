@@ -90,21 +90,73 @@ class DoublyLinkedList(object):
                 new_node.prev = prev
 
             curr = curr.next
-
-                
     
-# dlist = DoublyLinkedList()
-# dlist.append(1)
-# dlist.append(2)
-# dlist.append(3)
-# dlist.append(4)
-# dlist.prepend(0)
-# dlist.print()
+    def delete(self,key):
+        curr = self.head
+        while curr:
+            if curr.data == key and curr == self.head:
+
+                #Case 1: 
+
+                if not curr.next:
+                    curr = None
+                    self.head =  None
+                    return
+                
+                #Case 2:
+                
+                else:
+                    nxt = curr.next
+                    curr.next = None
+                    nxt.prev  = None
+                    curr = None
+                    self.head = nxt
+                    return 
+            
+            elif curr.data == key:
+
+                #Case 3: 
+                if  curr.next:
+                    nxt  = curr.next
+                    prev = curr.prev
+                    prev.next = nxt
+                    nxt.prev  = prev
+                    curr.next = None
+                    curr.prev = None
+                    curr = None
+                    return
+                 
+                #Case 4: 
+                else:
+                    
+                    prev = curr.prev
+                    prev.next = None
+                    curr.prev = None
+                    curr = None
+                    return
+            
+            curr = curr.next
+    
+    def reverse(self):
+        temp = None
+        curr = self.head
+
+        while curr:
+            temp = curr.prev
+            curr.prev = curr.next
+            curr.next = temp
+            curr = curr.prev
+
+        if temp:
+            self.head = temp.prev
+        
+
 
 dlist = DoublyLinkedList()
 dlist.append(1)
 dlist.append(2)
 dlist.append(3)
 dlist.append(4)
-dlist.insert_before(4,12)
+dlist.print()
+dlist.reverse()
 dlist.print()
